@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+<h1 class="mb-3">Añadir curso</h1>
+
+<!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+<form action="/form" method="post" class="needs-validation" novalidate>
+  <div class="row">
+    <div class="col-md">
+      <div class="form-group">
+        <input type="text" maxlength="12" minlength="3" class="form-control" name="Sigla" id="Sigla" placeholder="Sigla" required>
+        <div class="invalid-feedback">
+          Por favor agrega la sigla del curso. (Ej: MAT1203)
+        </div>
+        <div class="valid-feedback">
+          Perfecto!
+        </div>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <input type="number" min="1" max="60" class="form-control" name="Sección" id="Sección" placeholder="Sección" required>
+        <div class="invalid-feedback">
+          Por favor agrega la sección del curso. (Ej: 3)
+        </div>
+        <div class="valid-feedback">
+          Perfecto!
+        </div>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <select class="form-control" name="Facultad" id="Facultad">
+          <option>Ingeniería</option>
+          <option>Matemáticas</option>
+          <option>Ciencias Biológicas</option>
+        </select>
+        <div class="valid-feedback">
+          uwu!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input class="form-control active" checked="checked" type="radio" value="Zoom" name="Plataforma" id="Zoom"
+            > Zoom
+        </label>
+        <label class="btn btn-secondary">
+          <input class="form-control" type="radio" value="Meet" name="Plataforma" id="Meet">
+          Meet
+        </label>
+        <label class="btn btn-secondary">
+          <input class="form-control" type="radio" value="Canvas" name="Plataforma" id="Canvas">
+          Canvas
+        </label>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <input type="URL" class="form-control" name="Link" id="Link" placeholder="Link" required>
+        <div class="invalid-feedback">
+          Asegúrate que empiece por "https://" y sea el dominio correcto.
+        </div>
+        <div class="valid-feedback">
+          Perfecto!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col h-100">
+      <!-- http://getbootstrap.com/docs/4.1/components/buttons/ -->
+      <button class="btn btn-primary" id="submit" type="submit">Agregar</button>
+    </div>
+  </div>
+
+</form>
+
+<script>
+  (function () {
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+
+</script>
+
+{% endblock %}

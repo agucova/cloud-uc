@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<h1 class="mb-3">Catálogo</h1>
+
+<div id="table"></div>
+<script>
+  function makeTable(json) {
+    var cols = Object.keys(json[0]);
+
+    var headerRow = '';
+    var bodyRows = '';
+
+    cols.map(function (col) {
+      headerRow += '<th>' + col.charAt(0) + col.slice(1) + '</th>';
+    });
+
+    json.map(function (row) {
+      bodyRows += '<tr>';
+
+      cols.map(function (colName) {
+        bodyRows += '<td>' + row[colName] + '</td>';
+      })
+
+      bodyRows += '</tr>';
+    });
+    console.log(headerRow)
+    document.getElementById('table').innerHTML = '<table class="table"><thead><tr>' +
+      headerRow +
+      '</tr></thead><tbody>' +
+      bodyRows +
+      '</tbody></table>';
+
+  }
+  $.getJSON("static/sheet.json", function (data) {
+    makeTable(data);
+  })
+
+</script>
+{% endblock %}
